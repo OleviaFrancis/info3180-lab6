@@ -21,7 +21,7 @@ Vue.component('app-header', {
             </nav>
         </header>    
     `,
-    data: function() {}
+    data: function() {return {}}
 });
 
 Vue.component('app-footer', {
@@ -39,6 +39,30 @@ Vue.component('app-footer', {
     }
 })
 
+Vue.component('news-list', {
+    template: `
+    <div class="news">
+         <h2>News</h2>
+         <ul class="news__list">
+            <li v-for="article in articles" class="news__item">{{ article.title }}</li>
+         </ul>
+    </div>`,
+    created: function() {
+        let self = this;
+        fetch('https://newsapi.org/v2/top-headlines?country=us&apiKey=c2f9fdcde21c4d08bbf0dcd9a404f698') .then(function(response) {
+            return response.json();
+            })
+            .then(function(data) {
+                 console.log(data);
+                 self.articles = data.articles;
+            });
+            },
+            data: function() {
+                return {
+                    articles: []
+                }
+            } 
+});
 
 let app = new Vue({
     el: '#app',
