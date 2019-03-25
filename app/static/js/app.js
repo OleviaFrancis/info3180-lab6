@@ -46,7 +46,7 @@ const NewsList = Vue.component('news-list', {
          <ul class="news__list">
             <li v-for="article in articles" class="news__item">
             {{ article.title }}
-            <img v-bind:src="'{{articles.urlToImage}}'"/>
+            <img v-bind:src='article.urlToImage'/>
             </li>
          </ul>
         <div class="form-inline d-flex justify-content-center">
